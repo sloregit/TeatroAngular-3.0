@@ -10,12 +10,14 @@ export class PulsanteComponent implements OnInit {
   @Input() nomePosto: string;
   @Input() prenotato: boolean;
   @Input() nomePrenotazione;
+  @Input() nomeUtente: string;
+  @Output() nomePostoChange = new EventEmitter<string>();
   constructor() {}
   foo() {
     this.cliccato.emit(this);
   }
   mostraNome() {
-    //this.nomePostoChange.emit(this.nomePosto);
+    this.nomePostoChange.emit(this.nomePosto);
   }
   ngOnInit() {}
 }
