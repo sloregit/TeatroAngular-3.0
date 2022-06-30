@@ -22,12 +22,14 @@ export class AppComponent {
   spettacoloScelto: string;
   nomeUtente: string;
   spettacolo: Observable<Spettacolo>;
+  rapido: boolean;
   constructor(private TeatroDBService: TeatroDBService) {}
 
   //Ho il nomeUtente e lo spettacolo
   //spettacolo generato, observable così mi iscrivo quando mi serve il valore
   ///////////////////////////QUI
-  foo() {
+  getTeatro(rapido) {
+    this.rapido = rapido;
     let spettacoloObs$: Observable<Array<Spettacolo>> = this.spettacoliIn$.pipe(
       map((spettacoli: Array<Spettacolo>) =>
         spettacoli.filter(
@@ -47,6 +49,10 @@ export class AppComponent {
 
   foo2() {
     this.spettacolo.subscribe((val) => console.log(val));
+  }
+  //conferma le prenotazioni
+  confermaPrenotazioni() {
+    this.spettacolo.subscribe((spettacolo) => console.log(spettacolo));
   }
   getDati(admin) {
     this.admin = admin;

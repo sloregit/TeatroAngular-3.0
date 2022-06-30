@@ -10,10 +10,16 @@
   ></app-login>
   <br />
   <br />
-  <button [disabled]="!nomeUtente || !spettacoloScelto" (click)="foo()">
+  <button
+    [disabled]="!nomeUtente || !spettacoloScelto"
+    (click)="getTeatro(false)"
+  >
     Prenota
   </button>
-  <button [disabled]="!nomeUtente || !spettacoloScelto" (click)="foo2()">
+  <button
+    [disabled]="!nomeUtente || !spettacoloScelto"
+    (click)="getTeatro(true)"
+  >
     Veloce
   </button>
 </div>
@@ -22,9 +28,10 @@
     *ngIf="spettacolo"
     [(spettacolo)]="spettacolo"
     [nomeUtente]="nomeUtente"
+    [rapido]="rapido"
   ></app-sala-teatro>
 </div>
-
+<button (click)="confermaPrenotazioni()">conferm</button>
 <div *ngIf="admin && spettacoliIn$">
   <app-gestione [spettacoli]="spettacoliIn$"></app-gestione>
 </div>

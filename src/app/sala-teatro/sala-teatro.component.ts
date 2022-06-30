@@ -14,10 +14,17 @@ export class SalaTeatroComponent implements OnInit {
   @Input() nomeUtente: string;
   platea: Array<Array<string>>;
   palco: Array<Array<string>>;
-
+  @Input() rapido: boolean;
   constructor() {}
-  foo($event) {
+  foo($event) {}
+  //prenotazione Veloce
+  prenotaVeloce($event, zona, fila, posto) {
+    $event.nomePosto = this.nomeUtente;
     console.log($event);
+    this.spettacolo.subscribe((spettacolo: Spettacolo) => {
+      spettacolo.teatro[zona][fila][posto] = this.nomeUtente;
+    });
+    this.spettacoloChange.emit(this.spettacolo);
   }
   ngOnInit() {
     this.spettacolo.subscribe((spettacolo: Spettacolo) => {
