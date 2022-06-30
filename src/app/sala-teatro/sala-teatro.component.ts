@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 import { Spettacolo } from '../app.component';
 
 @Component({
@@ -11,19 +11,22 @@ export class SalaTeatroComponent implements OnInit {
   @Input() spettacolo: Observable<Spettacolo>;
   @Output() spettacoloChange = new EventEmitter();
   nomeSpettacolo: string;
-  @Input() nomeUtente: string;
+  @Input() nomeUtente;
   platea: Array<Array<string>>;
   palco: Array<Array<string>>;
   @Input() rapido: boolean;
+  temp;
   constructor() {}
   foo($event) {}
   //prenotazione Veloce
   prenotaVeloce($event, zona, fila, posto) {
     $event.nomePosto = this.nomeUtente;
-    console.log($event);
-    this.spettacolo.subscribe((spettacolo: Spettacolo) => {
-      spettacolo.teatro[zona][fila][posto] = this.nomeUtente;
-    });
+    this.spettacolo
+      .subscribe(
+        (spettacolo: Spettacolo) =>
+          (spettacolo.teatro[zona][fila][posto] = this.nomeUtente)
+      )
+      .unsubscribe();
     this.spettacoloChange.emit(this.spettacolo);
   }
   ngOnInit() {
