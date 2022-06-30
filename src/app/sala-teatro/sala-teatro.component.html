@@ -7,6 +7,7 @@
         [nomePosto]="posto"
         [prenotato]="prenotato"
         [rapido]="rapido"
+        (nomePostoEmitter)="mostraNome($event)"
         (cliccato)="rapido ? prenotaVeloce('platea', i, j) : foo($event)"
       >
       </app-pulsante>
