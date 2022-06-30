@@ -8,7 +8,15 @@
     [(spettacoloScelto)]="spettacoloScelto"
     [(nomeUtente)]="nomeUtente"
   ></app-login>
+  <br />
+  <br />
+  <button [disabled]="!nomeUtente || !spettacoloScelto" (click)="foo()">
+    Prenota
+  </button>
+  <button [disabled]="!nomeUtente || !spettacoloScelto">Veloce</button>
 </div>
+<div></div>
+
 <div *ngIf="admin && spettacoliIn">
   <app-gestione [spettacoli]="spettacoliIn"></app-gestione>
 </div>

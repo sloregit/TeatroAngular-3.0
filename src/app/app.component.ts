@@ -24,7 +24,7 @@ export class AppComponent {
   constructor(private TeatroDBService: TeatroDBService) {}
 
   //Ho il nomeUtente e lo spettacolo
-  prova() {
+  foo() {
     console.log(this.nomeUtente);
     console.log(this.spettacoloScelto);
   }

@@ -9,11 +9,13 @@ import { Spettacolo } from '../app.component';
 })
 export class GestioneComponent implements OnInit {
   @Input() spettacoli: Observable<Array<Spettacolo>>;
-  nomiSpettacoli: Array<string> = [];
-  constructor() {}
+  nomiSpettacoli: Array<string>;
+  constructor() {
+    this.nomiSpettacoli = new Array();
+  }
   vediSpettacoli() {
     this.spettacoli.subscribe((spettacolo: Array<Spettacolo>) => {
-      spettacolo.filter((spettacolo) =>
+      spettacolo.filter((spettacolo: Spettacolo) =>
         this.nomiSpettacoli.push(spettacolo.nomeSpettacolo)
       );
     });

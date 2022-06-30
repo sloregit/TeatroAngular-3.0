@@ -17,20 +17,20 @@ export class LoginComponent implements OnInit {
 
   logged: boolean;
   constructor() {
-    this.nomiSpettacoli = [];
+    this.nomiSpettacoli = new Array();
   }
-  seleziona($event) {
-    this.spettacoloSceltoChange.emit($event.target.value);
+  seleziona($event: Event) {
+    this.spettacoloSceltoChange.emit((<HTMLSelectElement>$event.target).value);
   }
-  inInput($event) {
-    this.nomeUtenteChange.emit($event.target.value);
+  inInput($event: KeyboardEvent) {
+    this.nomeUtenteChange.emit((<HTMLInputElement>$event.target).value);
   }
   ngOnInit() {
+    //filtra e inserisce nell'array solo i nomi degli spettacoli
     this.spettacoli.subscribe((spettacolo: Array<Spettacolo>) => {
-      spettacolo.filter((spettacolo) =>
+      spettacolo.filter((spettacolo: Spettacolo) =>
         this.nomiSpettacoli.push(spettacolo.nomeSpettacolo)
       );
     });
-    console.log(this.nomiSpettacoli);
   }
 }
