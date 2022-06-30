@@ -10,7 +10,7 @@ export class PulsanteComponent implements OnInit {
   @Input() nomePosto: string;
   @Input() prenotato: boolean;
   @Input() rapido: boolean;
-  @Output() nomePostoChange = new EventEmitter<string>();
+  @Output() nomePostoEmitter = new EventEmitter<string>();
   constructor() {}
   //selezionati = new Observable();
   prenotaV() {
@@ -19,7 +19,7 @@ export class PulsanteComponent implements OnInit {
     }
   }
   mostraNome() {
-    this.nomePostoChange.emit(this.nomePosto);
+    this.nomePostoEmitter.emit(this.nomePosto);
   }
   ngOnInit() {}
 }
