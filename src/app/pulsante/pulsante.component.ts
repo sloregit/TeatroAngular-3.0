@@ -16,7 +16,7 @@ export class PulsanteComponent implements OnInit {
     this.cliccato.emit(this);
   }
   mostraNome() {
-    this.nomePostoChange.emit(this.nomePrenotazione);
+    this.nomePostoChange.emit(this.nomePosto);
   }
   ngOnInit() {}
 }
