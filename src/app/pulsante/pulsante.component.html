@@ -1,6 +1,6 @@
 <button
   *ngIf="rapido"
-  (click)="nomePosto !== 'pippo' ? prenotaV() : mostraNome()"
+  (click)="nomePosto === 'pippo' ? prenotaV() : mostraNome()"
 >
   {{ nomePosto }}
 </button>

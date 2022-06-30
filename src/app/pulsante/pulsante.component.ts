@@ -19,7 +19,9 @@ export class PulsanteComponent implements OnInit {
     }
   }
   mostraNome() {
-    this.nomePostoEmitter.emit(this.nomePosto);
+    if (this.nomePosto) {
+      this.nomePostoEmitter.emit(this.nomePosto);
+    }
   }
   ngOnInit() {}
 }
