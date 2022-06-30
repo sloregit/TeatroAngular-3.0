@@ -26,9 +26,10 @@
 <div>
   <app-sala-teatro
     *ngIf="spettacolo"
-    [(spettacolo)]="spettacolo"
-    [nomeUtente]="nomeUtente"
     [rapido]="rapido"
+    [nomeUtente]="nomeUtente"
+    [(spettacolo)]="spettacolo"
+    (spettacoloChange)="spettacoloChange()"
   ></app-sala-teatro>
 </div>
 <button *ngIf="spettacolo" (click)="confermaPrenotazioni()">conferma</button>

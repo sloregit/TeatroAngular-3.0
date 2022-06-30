@@ -4,7 +4,7 @@ import { Observable, of, pipe, filter, map, throwError } from 'rxjs';
 
 export class Spettacolo {
   nomeSpettacolo: string;
-  teatro: Teatro; 
+  teatro: Teatro;
 }
 export class Teatro {
   platea: Array<Array<string>>;
@@ -46,7 +46,9 @@ export class AppComponent {
       error: (e) => console.error('' + JSON.stringify(e)),
     });
   }
-
+  spettacoloChange() {
+    console.log('we');
+  }
   foo2() {
     this.spettacolo.subscribe((val) => console.log(val));
   }

@@ -8,14 +8,13 @@ import { Spettacolo } from '../app.component';
   styleUrls: ['./sala-teatro.component.css'],
 })
 export class SalaTeatroComponent implements OnInit {
+  @Input() rapido: boolean;
   @Input() spettacolo: Observable<Spettacolo>;
   @Output() spettacoloChange = new EventEmitter();
-  nomeSpettacolo: string;
   @Input() nomeUtente: string;
+  nomeSpettacolo: string;
   platea: Array<Array<string>>;
   palco: Array<Array<string>>;
-  @Input() rapido: boolean;
-  nomePrenotazione: string;
   prenotato;
   constructor() {}
   foo($event) {}
