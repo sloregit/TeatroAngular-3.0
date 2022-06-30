@@ -4,7 +4,7 @@
     <span *ngFor="let posto of fila; let j = index">
       <app-pulsante
         [nomePosto]="posto"
-        [etichetta]="'P' + fila + posto"
+        [etichetta]="'P' + i + j"
         [prenotato]="prenotato"
         [rapido]="rapido"
         (nomePostoEmitter)="mostraNome($event)"
@@ -18,7 +18,7 @@
     <span *ngFor="let posto of fila; let m = index">
       <app-pulsante
         [nomePosto]="posto"
-        [etichetta]="'P' + fila + posto"
+        [etichetta]="'P' + n + m"
         [prenotato]="prenotato"
         [rapido]="rapido"
         (nomePostoEmitter)="mostraNome($event)"
