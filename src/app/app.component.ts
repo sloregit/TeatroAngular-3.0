@@ -54,6 +54,12 @@ export class AppComponent {
   confermaPrenotazioni() {
     this.spettacolo.subscribe((spettacolo) => console.log(spettacolo));
   }
+  inizio() {
+    this.spettacoliIn$ = undefined;
+  }
+  indietro() {
+    this.spettacolo = undefined;
+  }
   getDati(admin) {
     this.admin = admin;
     this.TeatroDBService.getPrenotazioni$().subscribe({

@@ -11,22 +11,21 @@ export class SalaTeatroComponent implements OnInit {
   @Input() spettacolo: Observable<Spettacolo>;
   @Output() spettacoloChange = new EventEmitter();
   nomeSpettacolo: string;
-  @Input() nomeUtente;
+  @Input() nomeUtente: string;
   platea: Array<Array<string>>;
   palco: Array<Array<string>>;
   @Input() rapido: boolean;
-  temp;
+  nomePrenotazione: string;
+  prenotato;
   constructor() {}
   foo($event) {}
   //prenotazione Veloce
-  prenotaVeloce($event, zona, fila, posto) {
-    $event.nomePosto = this.nomeUtente;
-    this.spettacolo
-      .subscribe(
-        (spettacolo: Spettacolo) =>
-          (spettacolo.teatro[zona][fila][posto] = this.nomeUtente)
-      )
-      .unsubscribe();
+  prenotaVeloce(zona, fila, posto) {
+    this.spettacolo.subscribe(
+      (spettacolo: Spettacolo) =>
+        (spettacolo.teatro[zona][fila][posto] = this.nomeUtente)
+    );
+    this.prenotato = true;
     this.spettacoloChange.emit(this.spettacolo);
   }
   ngOnInit() {

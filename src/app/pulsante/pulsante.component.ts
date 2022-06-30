@@ -8,11 +8,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PulsanteComponent implements OnInit {
   @Output() cliccato = new EventEmitter();
   @Input() nomePosto: string;
-  @Input() rapido: boolean;
-  onOff: boolean;
+  @Input() prenotato: boolean;
+  @Input() nomePrenotazione;
+  @Output() nomePostoChange = new EventEmitter<string>();
   constructor() {}
   foo() {
     this.cliccato.emit(this);
+  }
+  mostraNome() {
+    this.nomePostoChange.emit(this.nomePrenotazione);
   }
   ngOnInit() {}
 }
