@@ -1,7 +1,4 @@
-<button
-  *ngIf="rapido"
-  (click)="nomePosto !== 'pippo' ? prenotaV() : mostraNome()"
->
+<button *ngIf="rapido" (click)="prenotaV()">
   {{ nomePosto }}
 </button>
 <button *ngIf="!rapido">{{ nomePosto }}</button>
