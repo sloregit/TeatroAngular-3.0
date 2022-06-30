@@ -12,7 +12,7 @@ export class PulsanteComponent implements OnInit {
   @Input() rapido: boolean;
   @Output() nomePostoChange = new EventEmitter<string>();
   constructor() {}
-  selezionati = new Observable();
+  //selezionati = new Observable();
   prenotaV() {
     if (!this.prenotato) {
       this.cliccato.emit(this);
