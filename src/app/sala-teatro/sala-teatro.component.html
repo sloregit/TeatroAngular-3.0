@@ -1,0 +1,14 @@
+<div>
+  <div *ngFor="let fila of platea">
+    <span *ngFor="let posto of fila">
+      <app-pulsante [nomePosto]="posto" (cliccato)="foo($event)">
+      </app-pulsante>
+    </span>
+  </div>
+  <br />
+  <div *ngFor="let fila of palco">
+    <span *ngFor="let posto of fila">
+      <button></button>
+    </span>
+  </div>
+</div>

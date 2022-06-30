@@ -1,6 +1,6 @@
 import { Component, VERSION } from '@angular/core';
 import { TeatroDBService } from './teatro-db.service';
-import { Observable, of, pipe, filter, map } from 'rxjs';
+import { Observable, of, pipe, filter, map, throwError } from 'rxjs';
 
 export class Spettacolo {
   nomeSpettacolo: string;
@@ -17,18 +17,18 @@ export class Teatro {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  spettacoliIn: Observable<Array<Spettacolo>>;
+  spettacoliIn$: Observable<Array<Spettacolo>>;
   admin: boolean;
   spettacoloScelto: string;
   nomeUtente: string;
-  spettacolo: Spettacolo;
+  spettacolo: Observable<Spettacolo>;
   constructor(private TeatroDBService: TeatroDBService) {}
 
   //Ho il nomeUtente e lo spettacolo
-  //spettacolo generato
+  //spettacolo generato, observable così mi iscrivo quando mi serve il valore
   ///////////////////////////QUI
   foo() {
-    let spettacoloObs$: Observable<Array<Spettacolo>> = this.spettacoliIn.pipe(
+    let spettacoloObs$: Observable<Array<Spettacolo>> = this.spettacoliIn$.pipe(
       map((spettacoli: Array<Spettacolo>) =>
         spettacoli.filter(
           (spettacolo: Spettacolo) =>
@@ -36,22 +36,26 @@ export class AppComponent {
         )
       )
     );
-
-    spettacoloObs$.subscribe(
-      (spettacolo: Spettacolo[]) => (this.spettacolo = spettacolo[0])
-    );
+    spettacoloObs$.subscribe({
+      next: (spettacolo: Spettacolo[]) =>
+        (this.spettacolo = new Observable((subscriber) =>
+          subscriber.next(spettacolo[0])
+        )),
+      error: (e) => console.error('' + JSON.stringify(e)),
+    });
   }
+
   foo2() {
-    console.log(this.spettacolo);
+    this.spettacolo.subscribe((val) => console.log(val));
   }
   getDati(admin) {
     this.admin = admin;
     this.TeatroDBService.getPrenotazioni$().subscribe({
       next: (res: string) => {
-        this.spettacoliIn = of(JSON.parse(res));
+        this.spettacoliIn$ = of(JSON.parse(res));
       },
-      error: (err) =>
-        console.error('Observer got an error: ' + JSON.stringify(err)),
+      error: (e) =>
+        console.error('Observer got an error: ' + JSON.stringify(e)),
     });
   }
 }
