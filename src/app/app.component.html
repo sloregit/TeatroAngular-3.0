@@ -1,4 +1,14 @@
-<div>
-  <button (click)="getDati()">Accedi</button><br />
-  <button (click)="getDati()">Gestione spettacoli</button>
+<div *ngIf="!spettacoliIn">
+  <button (click)="getDati(false)">Accedi</button><br />
+  <button (click)="getDati(true)">Gestione spettacoli</button>
+</div>
+<div *ngIf="!admin && spettacoliIn">
+  <app-login
+    [spettacoli]="spettacoliIn"
+    [(spettacoloScelto)]="spettacoloScelto"
+    [(nomeUtente)]="nomeUtente"
+  ></app-login>
+</div>
+<div *ngIf="admin && spettacoliIn">
+  <app-gestione [spettacoli]="spettacoliIn"></app-gestione>
 </div>

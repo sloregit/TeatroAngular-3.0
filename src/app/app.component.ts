@@ -1,6 +1,6 @@
 import { Component, VERSION } from '@angular/core';
 import { TeatroDBService } from './teatro-db.service';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 export class Spettacolo {
   nomeSpettacolo: string;
@@ -17,12 +17,22 @@ export class Teatro {
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  datiIn: Array<Spettacolo>;
+  spettacoliIn: Observable<Array<Spettacolo>>;
+  admin: boolean;
+  spettacoloScelto: string;
+  nomeUtente: string;
   constructor(private TeatroDBService: TeatroDBService) {}
-  getDati() {
+
+  //Ho il nomeUtente e lo spettacolo
+  prova() {
+    console.log(this.nomeUtente);
+    console.log(this.spettacoloScelto);
+  }
+  getDati(admin) {
+    this.admin = admin;
     this.TeatroDBService.getPrenotazioni$().subscribe({
-      next: (res) => {
-        console.log(typeof res);
+      next: (res: string) => {
+        this.spettacoliIn = of(JSON.parse(res));
       },
       error: (err) =>
         console.error('Observer got an error: ' + JSON.stringify(err)),
