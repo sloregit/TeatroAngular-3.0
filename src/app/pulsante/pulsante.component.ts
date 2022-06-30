@@ -9,11 +9,10 @@ export class PulsanteComponent implements OnInit {
   @Output() cliccato = new EventEmitter();
   @Input() nomePosto: string;
   @Input() prenotato: boolean;
-  @Input() nomePrenotazione;
-  @Input() nomeUtente: string;
+  @Input() rapido: boolean;
   @Output() nomePostoChange = new EventEmitter<string>();
   constructor() {}
-  foo() {
+  prenotaV() {
     this.cliccato.emit(this);
   }
   mostraNome() {

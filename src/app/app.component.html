@@ -10,29 +10,33 @@
   ></app-login>
   <br />
   <br />
-  <button
-    [disabled]="!nomeUtente || !spettacoloScelto"
-    (click)="getTeatro(false)"
-  >
-    Prenota
-  </button>
-  <button
-    [disabled]="!nomeUtente || !spettacoloScelto"
-    (click)="getTeatro(true)"
-  >
-    Veloce
-  </button>
+  <div *ngIf="rapido == undefined">
+    <button
+      *ngIf="rapido === false"
+      [disabled]="!nomeUtente || !spettacoloScelto"
+      (click)="getTeatro(false)"
+    >
+      Prenota
+    </button>
+    <button
+      *ngIf="rapido === true"
+      [disabled]="!nomeUtente || !spettacoloScelto"
+      (click)="getTeatro(true)"
+    >
+      Veloce
+    </button>
+  </div>
 </div>
-<div>
+<div *ngIf="spettacolo">
+  <p>{{ conferma }}</p>
   <app-sala-teatro
-    *ngIf="spettacolo"
     [rapido]="rapido"
     [nomeUtente]="nomeUtente"
     [(spettacolo)]="spettacolo"
     (spettacoloChange)="spettacoloChange()"
   ></app-sala-teatro>
+  <button (click)="confermaPrenotazioni()">conferma</button>
 </div>
-<button *ngIf="spettacolo" (click)="confermaPrenotazioni()">conferma</button>
 <div *ngIf="admin && spettacoliIn$">
   <app-gestione [spettacoli]="spettacoliIn$"></app-gestione>
 </div>

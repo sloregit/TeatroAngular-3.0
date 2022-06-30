@@ -15,11 +15,11 @@ export class SalaTeatroComponent implements OnInit {
   nomeSpettacolo: string;
   platea: Array<Array<string>>;
   palco: Array<Array<string>>;
-  prenotato;
+  prenotato: boolean;
   constructor() {}
   foo($event) {}
   //prenotazione Veloce
-  prenotaVeloce(zona, fila, posto) {
+  prenotaVeloce(zona: string, fila: number, posto: number) {
     this.spettacolo.subscribe(
       (spettacolo: Spettacolo) =>
         (spettacolo.teatro[zona][fila][posto] = this.nomeUtente)

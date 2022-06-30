@@ -23,12 +23,30 @@ export class AppComponent {
   nomeUtente: string;
   spettacolo: Observable<Spettacolo>;
   rapido: boolean;
+  conferma: string;
   constructor(private TeatroDBService: TeatroDBService) {}
 
-  //Ho il nomeUtente e lo spettacolo
-  //spettacolo generato, observable così mi iscrivo quando mi serve il valore
-  ///////////////////////////QUI
-  getTeatro(rapido) {
+  foo2() {
+    this.spettacolo.subscribe((val) => console.log(val));
+  }
+  //conferma le prenotazioni
+  confermaPrenotazioni() {
+    this.spettacolo.subscribe((spettacolo) => console.log(spettacolo));
+  }
+
+  //prenota al click
+  spettacoloChange() {
+    //OK
+    this.spettacoliIn$.subscribe((spettacoli: Array<Spettacolo>) =>
+      this.TeatroDBService.SetPrenotazioni$(
+        JSON.stringify(spettacoli)
+      ).subscribe(
+        (val) => (this.conferma = val + ': ' + this.nomeUtente + ' aggiunto')
+      )
+    );
+  }
+  //recupera lo spettacolo dai dati in ingresso e lo trasforma in observable
+  getTeatro(rapido: boolean) {
     this.rapido = rapido;
     let spettacoloObs$: Observable<Array<Spettacolo>> = this.spettacoliIn$.pipe(
       map((spettacoli: Array<Spettacolo>) =>
@@ -46,23 +64,8 @@ export class AppComponent {
       error: (e) => console.error('' + JSON.stringify(e)),
     });
   }
-  spettacoloChange() {
-    console.log('we');
-  }
-  foo2() {
-    this.spettacolo.subscribe((val) => console.log(val));
-  }
-  //conferma le prenotazioni
-  confermaPrenotazioni() {
-    this.spettacolo.subscribe((spettacolo) => console.log(spettacolo));
-  }
-  inizio() {
-    this.spettacoliIn$ = undefined;
-  }
-  indietro() {
-    this.spettacolo = undefined;
-  }
-  getDati(admin) {
+  //recupera i dati dal server
+  getDati(admin: boolean) {
     this.admin = admin;
     this.TeatroDBService.getPrenotazioni$().subscribe({
       next: (res: string) => {
@@ -71,5 +74,15 @@ export class AppComponent {
       error: (e) =>
         console.error('Observer got an error: ' + JSON.stringify(e)),
     });
+  }
+  //torna da teatro --> all'inizio
+  inizio() {
+    this.spettacoliIn$ = undefined;
+    this.rapido = undefined;
+  }
+  //torna da teatro --> a login
+  indietro() {
+    this.spettacolo = undefined;
+    this.rapido = undefined;
   }
 }

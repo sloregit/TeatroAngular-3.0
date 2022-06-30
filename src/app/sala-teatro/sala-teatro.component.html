@@ -4,6 +4,7 @@
       <app-pulsante
         [nomePosto]="posto"
         [prenotato]="prenotato"
+        [rapido]="rapido"
         (cliccato)="rapido ? prenotaVeloce('platea', i, j) : foo($event)"
       >
       </app-pulsante>
@@ -15,6 +16,7 @@
       <app-pulsante
         [nomePosto]="posto"
         [prenotato]="prenotato"
+        [rapido]="rapido"
         (cliccato)="rapido ? prenotaVeloce('platea', n, m) : foo($event)"
       >
       </app-pulsante>
