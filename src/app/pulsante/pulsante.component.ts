@@ -13,7 +13,9 @@ export class PulsanteComponent implements OnInit {
   @Output() nomePostoChange = new EventEmitter<string>();
   constructor() {}
   prenotaV() {
-    this.cliccato.emit(this);
+    if (!this.prenotato) {
+      this.cliccato.emit(this);
+    }
   }
   mostraNome() {
     this.nomePostoChange.emit(this.nomePosto);

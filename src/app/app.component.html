@@ -2,7 +2,7 @@
   <button (click)="getDati(false)">Accedi</button><br />
   <button (click)="getDati(true)">Gestione spettacoli</button>
 </div>
-<div *ngIf="!admin && spettacoliIn$">
+<div *ngIf="!admin && spettacoliIn$ && !spettacolo">
   <app-login
     [spettacoli]="spettacoliIn$"
     [(spettacoloScelto)]="spettacoloScelto"
@@ -10,16 +10,14 @@
   ></app-login>
   <br />
   <br />
-  <div *ngIf="rapido == undefined">
+  <div *ngIf="rapido === undefined">
     <button
-      *ngIf="rapido === false"
       [disabled]="!nomeUtente || !spettacoloScelto"
       (click)="getTeatro(false)"
     >
       Prenota
     </button>
     <button
-      *ngIf="rapido === true"
       [disabled]="!nomeUtente || !spettacoloScelto"
       (click)="getTeatro(true)"
     >
@@ -28,7 +26,7 @@
   </div>
 </div>
 <div *ngIf="spettacolo">
-  <p>{{ conferma }}</p>
+  <p>{{ conferma || nomeUtente + ', seleziona un posto' }}</p>
   <app-sala-teatro
     [rapido]="rapido"
     [nomeUtente]="nomeUtente"

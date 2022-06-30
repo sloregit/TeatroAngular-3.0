@@ -24,6 +24,7 @@ export class AppComponent {
   spettacolo: Observable<Spettacolo>;
   rapido: boolean;
   conferma: string;
+  
   constructor(private TeatroDBService: TeatroDBService) {}
 
   foo2() {
@@ -84,5 +85,6 @@ export class AppComponent {
   indietro() {
     this.spettacolo = undefined;
     this.rapido = undefined;
+    this.nomeUtente = undefined;
   }
 }
