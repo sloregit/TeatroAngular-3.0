@@ -21,9 +21,11 @@ export class SalaTeatroComponent implements OnInit {
   foo($event) {}
   //prenotazione Veloce
   prenotaVeloce(zona, fila, posto) {
-    this.spettacolo.subscribe(
-      (spettacolo: Spettacolo) =>
-        (spettacolo.teatro[zona][fila][posto] = this.nomeUtente)
+    this.spettacolo.pipe(
+      map(
+        (spettacolo: Spettacolo) =>
+          (spettacolo.teatro[zona][fila][posto] = this.nomeUtente)
+      )
     );
     this.prenotato = true;
     this.spettacoloChange.emit(this.spettacolo);

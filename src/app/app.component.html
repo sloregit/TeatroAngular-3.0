@@ -31,7 +31,7 @@
     [rapido]="rapido"
   ></app-sala-teatro>
 </div>
-<button (click)="confermaPrenotazioni()">conferm</button>
+<button *ngIf="spettacolo" (click)="confermaPrenotazioni()">conferma</button>
 <div *ngIf="admin && spettacoliIn$">
   <app-gestione [spettacoli]="spettacoliIn$"></app-gestione>
 </div>
