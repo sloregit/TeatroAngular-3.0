@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PulsanteComponent implements OnInit {
   @Output() cliccato = new EventEmitter();
   @Input() nomePosto: string;
+  @Input() etichetta: string;
   @Input() prenotato: boolean;
   @Input() rapido: boolean;
   @Output() nomePostoEmitter = new EventEmitter<string>();
@@ -19,11 +20,7 @@ export class PulsanteComponent implements OnInit {
     }
   }
   mostraNome() {
-    if (this.nomePosto) {
-      this.nomePostoEmitter.emit(this.nomePosto);
-    } else {
-      this.nomePostoEmitter.emit(undefined);
-    }
+    this.nomePostoEmitter.emit(this.nomePosto);
   }
   ngOnInit() {}
 }

@@ -1,7 +1,8 @@
 <button
+  [ngClass]="nomePosto !== null ? 'prenotato' : 'libero'"
   *ngIf="rapido"
-  (click)="nomePosto === undefined ? prenotaV() : mostraNome()"
+  (click)="!nomePosto ? prenotaV() : mostraNome()"
 >
-  {{ nomePosto }}
+  {{ etichetta }}
 </button>
 <button *ngIf="!rapido">{{ nomePosto }}</button>
