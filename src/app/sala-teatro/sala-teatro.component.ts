@@ -13,6 +13,7 @@ export class SalaTeatroComponent implements OnInit {
   @Output() spettacoloChange = new EventEmitter();
   @Input() nomeUtente: string;
   nomeSpettacolo: string;
+  nomePosto: string;
   platea: Array<Array<string>>;
   palco: Array<Array<string>>;
   prenotato: boolean;
@@ -26,6 +27,10 @@ export class SalaTeatroComponent implements OnInit {
     );
     this.prenotato = true;
     this.spettacoloChange.emit(this.spettacolo);
+  }
+  //mostra il nome del posto prenotato
+  mostraNome($event) {
+    this.nomePosto = $event;
   }
   ngOnInit() {
     this.spettacolo.subscribe((spettacolo: Spettacolo) => {
