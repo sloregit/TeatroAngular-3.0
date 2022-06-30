@@ -14,8 +14,8 @@ export class GestioneComponent implements OnInit {
     this.nomiSpettacoli = new Array();
   }
   vediSpettacoli() {
-    this.spettacoli.subscribe((spettacolo: Array<Spettacolo>) => {
-      spettacolo.filter((spettacolo: Spettacolo) =>
+    this.spettacoli.subscribe((spettacoli: Array<Spettacolo>) => {
+      spettacoli.map((spettacolo: Spettacolo) =>
         this.nomiSpettacoli.push(spettacolo.nomeSpettacolo)
       );
     });

@@ -27,8 +27,8 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     //filtra e inserisce nell'array solo i nomi degli spettacoli
-    this.spettacoli.subscribe((spettacolo: Array<Spettacolo>) => {
-      spettacolo.filter((spettacolo: Spettacolo) =>
+    this.spettacoli.subscribe((spettacoli: Array<Spettacolo>) => {
+      spettacoli.map((spettacolo: Spettacolo) =>
         this.nomiSpettacoli.push(spettacolo.nomeSpettacolo)
       );
     });
