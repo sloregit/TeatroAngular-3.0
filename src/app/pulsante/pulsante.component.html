@@ -5,4 +5,4 @@
 >
   {{ etichetta }}
 </button>
-<button *ngIf="!rapido">{{ nomePosto }}</button>
+<button *ngIf="!rapido" (click)="prenotaL()">{{ nomePosto }}</button>
