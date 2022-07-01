@@ -11,6 +11,7 @@
         (cliccato)="
           rapido ? prenotaVeloce('platea', i, j) : seleziona('platea', i, j)
         "
+        (selezionatoEmitter)="selezionato = $event"
       >
       </app-pulsante>
     </span>
@@ -27,6 +28,7 @@
         (cliccato)="
           rapido ? prenotaVeloce('palco', n, m) : seleziona('palco', n, m)
         "
+        (selezionatoEmitter)="selezionato = $event"
       >
       </app-pulsante>
     </span>
