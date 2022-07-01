@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable, of, map, Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Spettacolo } from '../app.component';
 
 export class Prenotazione {
@@ -16,11 +16,11 @@ export class Prenotazione {
 }
 
 export class Selezione {
-  selezionati;
+  selezionati: Array<Prenotazione>;
   constructor() {
     this.selezionati = [];
   }
-  aggiungi(prenotazione) {
+  aggiungi(prenotazione: Prenotazione) {
     this.selezionati.push(prenotazione);
   }
   rimuovi(fila: number, posto: number) {
@@ -40,7 +40,7 @@ export class Selezione {
 export class SalaTeatroComponent implements OnInit {
   @Input() rapido: boolean;
   @Input() spettacolo: Observable<Spettacolo>;
-  @Output() spettacoloChange = new EventEmitter();
+  @Output() spettacoloChange = new EventEmitter<Observable<Spettacolo>>();
   @Input() nomeUtente: string;
   nomeSpettacolo: string;
   nomePosto: string;
@@ -89,9 +89,10 @@ export class SalaTeatroComponent implements OnInit {
     this.spettacoloChange.emit(this.spettacolo);
   }
   //mostra il nome del posto prenotato
-  mostraNome($event) {
+  mostraNome($event: string) {
     this.nomePosto = $event;
   }
+  //invocata subito dopo il caricamento del component
   ngOnInit() {
     this.spettacolo.subscribe((spettacolo: Spettacolo) => {
       this.platea = spettacolo.teatro.platea;

@@ -21,6 +21,8 @@ export class GestioneComponent implements OnInit {
     });
     console.log(this.nomiSpettacoli);
   }
-
+  nascondi() {
+    this.nomiSpettacoli = undefined;
+  }
   ngOnInit() {}
 }

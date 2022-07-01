@@ -1,6 +1,4 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable, of, pipe, filter, map, throwError } from 'rxjs';
-
 @Component({
   selector: 'app-pulsante',
   templateUrl: './pulsante.component.html',
@@ -14,11 +12,10 @@ export class PulsanteComponent implements OnInit {
   @Input() rapido: boolean;
   @Output() nomePostoEmitter = new EventEmitter<string>();
   selezionato: boolean;
-  @Output() selezionatoEmitter = new EventEmitter();
+  @Output() selezionatoEmitter = new EventEmitter<boolean>();
   constructor() {
     this.selezionato = false;
   }
-
   prenotaL() {
     if (this.nomePosto === null) {
       this.selezionato === true
@@ -28,8 +25,6 @@ export class PulsanteComponent implements OnInit {
     this.selezionatoEmitter.emit(this.selezionato);
     this.cliccato.emit();
   }
-
-  //funzionanti
   prenotaV() {
     if (!this.prenotato) {
       this.cliccato.emit();

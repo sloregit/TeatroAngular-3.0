@@ -1,6 +1,6 @@
 import { Component, VERSION } from '@angular/core';
 import { TeatroDBService } from './teatro-db.service';
-import { Observable, of, pipe, filter, map, throwError } from 'rxjs';
+import { Observable, of, map } from 'rxjs';
 
 export class Spettacolo {
   nomeSpettacolo: string;
