@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Observable, of, pipe, filter, map, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-pulsante',
@@ -12,9 +13,21 @@ export class PulsanteComponent implements OnInit {
   @Input() prenotato: boolean;
   @Input() rapido: boolean;
   @Output() nomePostoEmitter = new EventEmitter<string>();
-  constructor() {}
-  //selezionati = new Observable();
-  prenotaL() {}
+  selezionato: boolean;
+  @Output() selezionatoEmitter = new EventEmitter();
+  constructor() {
+    this.selezionato = false;
+  }
+
+  prenotaL() {
+    if (this.nomePosto === null) {
+      this.selezionato === true
+        ? (this.selezionato = false)
+        : (this.selezionato = true);
+    }
+    this.selezionatoEmitter.emit(this.selezionato);
+    this.cliccato.emit();
+  }
 
   //funzionanti
   prenotaV() {

@@ -5,4 +5,11 @@
 >
   {{ etichetta }}
 </button>
-<button *ngIf="!rapido" (click)="prenotaL()">{{ nomePosto }}</button>
+<button
+  [ngClass]="selezionato && !prenotato ? 'selezionato' : 'nonSelezionato'"
+  [ngClass]="nomePosto !== null ? 'prenotato' : 'libero'"
+  *ngIf="!rapido"
+  (click)="prenotaL()"
+>
+  {{ etichetta }}
+</button>

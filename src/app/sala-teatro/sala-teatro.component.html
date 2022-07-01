@@ -8,7 +8,10 @@
         [prenotato]="prenotato"
         [rapido]="rapido"
         (nomePostoEmitter)="mostraNome($event)"
-        (cliccato)="rapido ? prenotaVeloce('platea', i, j) : foo($event)"
+        (cliccato)="
+          rapido ? prenotaVeloce('platea', i, j) : seleziona('platea', i, j)
+        "
+        (selezionatoEmitter)="selezionato = $event"
       >
       </app-pulsante>
     </span>
@@ -22,9 +25,13 @@
         [prenotato]="prenotato"
         [rapido]="rapido"
         (nomePostoEmitter)="mostraNome($event)"
-        (cliccato)="rapido ? prenotaVeloce('palco', n, m) : foo($event)"
+        (cliccato)="
+          rapido ? prenotaVeloce('palco', n, m) : seleziona('palco', n, m)
+        "
+        (selezionatoEmitter)="selezionato = $event"
       >
       </app-pulsante>
     </span>
   </div>
+  <button *ngIf="!rapido" (click)="confermaPrenotazioni()">conferma</button>
 </div>

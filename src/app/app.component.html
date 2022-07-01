@@ -33,7 +33,6 @@
     [(spettacolo)]="spettacolo"
     (spettacoloChange)="spettacoloChange()"
   ></app-sala-teatro>
-  <button *ngIf="!rapido" (click)="confermaPrenotazioni()">conferma</button>
 </div>
 <div *ngIf="admin && spettacoliIn$">
   <app-gestione [spettacoli]="spettacoliIn$"></app-gestione>
