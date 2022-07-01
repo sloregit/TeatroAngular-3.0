@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Observable, of, map } from 'rxjs';
+import { Observable, of, map, Subscription } from 'rxjs';
 import { Spettacolo } from '../app.component';
 
 export class Prenotazione {
@@ -48,30 +48,40 @@ export class SalaTeatroComponent implements OnInit {
   palco: Array<Array<string>>;
   prenotato: boolean;
   newPrenotazione: Prenotazione;
-  selezionati;
+  prenotaGruppo: Selezione;
   selezionato: boolean;
+  subscription: Subscription;
   constructor() {
     if (!this.rapido) {
-      this.selezionati = new Selezione();
+      this.prenotaGruppo = new Selezione();
     }
   }
+
+  //mappa i selezionati e aggiorna lo spettacolo
   confermaPrenotazioni() {
-    this.spettacolo.subscribe((spettacolo: Spettacolo) => {
-      this.selezionati.map((elem) => console.log(elem));
+    this.subscription = this.spettacolo.subscribe((spettacolo: Spettacolo) => {
+      this.prenotaGruppo.selezionati.map(
+        (prenotazione: Prenotazione) =>
+          (spettacolo.teatro[prenotazione.zona][prenotazione.fila][
+            prenotazione.posto
+          ] = prenotazione.nome)
+      );
     });
+    this.prenotato = true;
+    this.spettacoloChange.emit(this.spettacolo);
   }
+  //crea il gruppo di prenotazioni
   seleziona(zona: string, fila: number, posto: number) {
     this.newPrenotazione = new Prenotazione(zona, this.nomeUtente, fila, posto);
     if (this.selezionato === true) {
-      this.selezionati.aggiungi(this.newPrenotazione);
+      this.prenotaGruppo.aggiungi(this.newPrenotazione);
     } else {
-      this.selezionati.rimuovi(fila, posto);
+      this.prenotaGruppo.rimuovi(fila, posto);
     }
-    console.log(this.selezionati);
   }
   //prenotazione Veloce
   prenotaVeloce(zona: string, fila: number, posto: number) {
-    this.spettacolo.subscribe(
+    this.subscription = this.spettacolo.subscribe(
       (spettacolo: Spettacolo) =>
         (spettacolo.teatro[zona][fila][posto] = this.nomeUtente)
     );
@@ -89,11 +99,3 @@ export class SalaTeatroComponent implements OnInit {
     });
   }
 }
-/**
- //PER AGGIORNARE LO SPETTACOLO
-    this.spettacolo.subscribe((val) => {
-      val.nomeSpettacolo = this.nomeSpettacolo;
-      val.teatro = this.
-      this.spettacoloChange.emit(this.spettacolo);
-    });
- */

@@ -9,7 +9,7 @@
   [ngClass]="selezionato && !prenotato ? 'selezionato' : 'nonSelezionato'"
   [ngClass]="nomePosto !== null ? 'prenotato' : 'libero'"
   *ngIf="!rapido"
-  (click)="prenotaL()"
+  (click)="!nomePosto ? prenotaL() : mostraNome()"
 >
   {{ etichetta }}
 </button>
